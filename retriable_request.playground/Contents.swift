@@ -1,6 +1,6 @@
-private func wrapRetriableForever<T>(_ request: @escaping (() -> Observable<T>),
-                                     delay: DispatchTimeInterval,
-                                     retryWhen canRetry: @escaping ((T) throws -> Bool)) -> Observable<T> {
+private func wrapRetriable<T>(_ request: @escaping (() -> Observable<T>),
+                                delay: DispatchTimeInterval,
+                                retryWhen canRetry: @escaping ((T) throws -> Bool)) -> Observable<T> {
     Observable<T>.create { (s) -> Disposable in
         let subscription = request().subscribe(s)
         return Disposables.create {
